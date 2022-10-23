@@ -6,8 +6,8 @@ namespace APITest.Controllers
     public class EmployeeController : BaseController
     {
         private const string GetEmployeeUrl = "/employees";
-        private const string GetEmployeeByIdUrl = "/employees/{0}";
-        private const string PostEmployeeURL = "/create";
+        private const string GetEmployeeByIdUrl = "/employees/1";
+        private const string PostEmployeeUrl = "/create";
         private const string DeleteEmployeeUrl = "/delete/{0}";
         private const string PutEmployeeUrl = "/update/{0}";
         private const string GetNonExistentEmployeeByIdUrl = "/employees/{0+24}";
@@ -21,10 +21,15 @@ namespace APITest.Controllers
             return await this.GetAsync(resource);
         }
 
-        protected async Task<object> GetEmployeeByIdAsync(int employeeId)
+        protected async Task<object> GetEmployeeByIdAsync(/*int employeeId*/)
         {
-            var resource = string.Join(this.BaseUrl, string.Format(GetEmployeeByIdUrl, employeeId));
+            var resource = string.Join(this.BaseUrl, string.Format(GetEmployeeByIdUrl/*, employeeId*/));
             return await this.GetAsync(resource);
         }
+
+/*        protected async Task<object> PostEmployeeUrlAsync()
+        {
+            var resourse = string.Join(this.BaseUrl, string.Format(PostEmployeeUrl);
+        }*/
     }
 }

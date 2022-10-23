@@ -7,6 +7,7 @@ using NUnit.Framework.Internal.Commands;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Assert = NUnit.Framework.Assert;
 
 namespace APITest.Tests
 {
@@ -18,6 +19,13 @@ namespace APITest.Tests
         {
             var response = await this.GetEmployeeAsync();
             response.Should().NotBeNull("Response is null");
+        }
+
+        [Test]
+        public async Task CheckThatEmployeeControllerReturnsResponseById()
+        {
+            var response = await this.GetEmployeeByIdAsync();
+            Assert.AreEqual(ConfigConstants.ExpectedId, response);
         }
     }
 }
