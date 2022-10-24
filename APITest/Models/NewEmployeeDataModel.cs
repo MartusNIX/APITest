@@ -5,7 +5,7 @@ using System.Text;
 
 namespace APITest.Models
 {
-    public class CreateEmployeeDataModel
+    public class NewEmployeeDataModel
     {
         [JsonProperty("name")]
         public string name { get; set; }
@@ -15,5 +15,8 @@ namespace APITest.Models
 
         [JsonProperty("age")]
         public string age { get; set; }
+
+        [JsonProperty("message")]
+        public string message { get; set; }
     }
 }

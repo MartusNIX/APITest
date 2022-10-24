@@ -5,7 +5,7 @@ using System.Text;
 
 namespace APITest.Models
 {
-    internal class SingleEmployeeModel
+    public class SingleEmployeeModel
     {
         [JsonProperty("status")]
         public string status { get; set; }

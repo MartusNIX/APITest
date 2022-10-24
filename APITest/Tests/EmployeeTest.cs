@@ -42,14 +42,15 @@ namespace APITest.Tests
         [Test]
         public async Task CheckThatEmployeeControllerPostNewEmployee()
         {
-            CreateEmployeeDataModel model = new CreateEmployeeDataModel();
+            NewEmployeeDataModel model = new NewEmployeeDataModel();
             model.name = "Krol";
             model.salary = "5000";
             model.age = "29";
-            var send = await this.PostEmployeeAsync(model);
-
-
-
+            var sentResponse = await this.PostEmployeeAsync(model);
+            var jsonContent = JsonConvert.DeserializeObject<NewEmployeeDataModel>(sentResponse.Content);
+            var actualMessage = jsonContent.message;
+            var expectedMessage = ConfigConstants.SuccessMessagePOST;
+            Assert.AreEqual(expectedMessage, actualMessage, "User not created");
         }
     }
 }

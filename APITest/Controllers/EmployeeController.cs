@@ -28,7 +28,7 @@ namespace APITest.Controllers
             return await this.GetAsync(resource);
         }
 
-        protected async Task<IRestResponse> PostEmployeeAsync(CreateEmployeeDataModel model)
+        protected async Task<IRestResponse> PostEmployeeAsync(NewEmployeeDataModel model)
         {
             var resourse = string.Join(this.BaseUrl, PostEmployeeUrl);
             return await this.PostAsync(resourse, model);
