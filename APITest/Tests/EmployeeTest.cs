@@ -42,7 +42,12 @@ namespace APITest.Tests
         [Test]
         public async Task CheckThatEmployeeControllerPostNewEmployee()
         {
-            var send = await this.PostEmployeeAsync();
+            CreateEmployeeDataModel model = new CreateEmployeeDataModel();
+            model.name = "Krol";
+            model.salary = "5000";
+            model.age = "29";
+            var send = await this.PostEmployeeAsync(model);
+
 
 
         }

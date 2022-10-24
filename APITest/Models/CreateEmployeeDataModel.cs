@@ -5,15 +5,15 @@ using System.Text;
 
 namespace APITest.Models
 {
-    internal class CreateEmployeeDataModel
+    public class CreateEmployeeDataModel
     {
-        [JsonProperty("employee_name")]
-        public string employee_name { get; set; }
+        [JsonProperty("name")]
+        public string name { get; set; }
 
-        [JsonProperty("employee_salary")]
-        public string employee_salary { get; set; }
+        [JsonProperty("salary")]
+        public string salary { get; set; }
 
-        [JsonProperty("employee_age")]
-        public string employee_age { get; set; }
+        [JsonProperty("age")]
+        public string age { get; set; }
     }
 }

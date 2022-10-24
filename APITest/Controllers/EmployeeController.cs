@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using APITest.Models;
+using RestSharp;
 using System.Threading.Tasks;
 
 namespace APITest.Controllers
@@ -27,10 +28,10 @@ namespace APITest.Controllers
             return await this.GetAsync(resource);
         }
 
-        protected async Task<IRestResponse> PostEmployeeAsync()
+        protected async Task<IRestResponse> PostEmployeeAsync(CreateEmployeeDataModel model)
         {
             var resourse = string.Join(this.BaseUrl, PostEmployeeUrl);
-            return await this.PutAsync(resourse);
+            return await this.PostAsync(resourse, model);
         }
     }
 }

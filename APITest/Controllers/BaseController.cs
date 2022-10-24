@@ -1,6 +1,12 @@
 ﻿using APITest.Constants;
 using APITest.Managers;
+using APITest.Models;
+using FluentAssertions.Equivalency;
+using NUnit.Framework;
 using RestSharp;
+using RestSharp.Validation;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace APITest.Controllers
@@ -16,9 +22,11 @@ namespace APITest.Controllers
             return await this.RestClient.ExecuteAsync<IRestResponse>(request, Method.GET);
         }
 
-        protected async Task<IRestResponse> PostAsync(string resource)
+        protected async Task<IRestResponse> PostAsync(string resource, CreateEmployeeDataModel model)
         {
             var request = new RestRequest(resource, Method.POST);
+            //request.AddParameter();
+            request.AddJsonBody(model);
             return await this.RestClient.ExecuteAsync<IRestResponse>(request, Method.POST);
         }
 
