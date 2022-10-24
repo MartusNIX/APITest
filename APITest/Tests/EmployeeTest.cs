@@ -2,6 +2,7 @@
 using APITest.Controllers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using NUnit.Framework.Internal.Commands;
 using System;
@@ -17,8 +18,14 @@ namespace APITest.Tests
         [Test]
         public async Task CheckThatEmployeeControllerReturnsResponse()
         {
+            //var response = await this.GetEmployeeAsync();
+            //response.Should().NotBeNull("Response is null");
             var response = await this.GetEmployeeAsync();
-            response.Should().NotBeNull("Response is null");
+            var jsonContent = JsonConvert.DeserializeObject<RootMult>(response.Content);
+            var actualStatus = jsonContent.status;
+            var expectedStatus = "success";
+
+            Assert.AreEqual(expectedStatus, actualStatus, "The records has not been found");
         }
 
         [Test]
