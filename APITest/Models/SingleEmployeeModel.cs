@@ -11,6 +11,9 @@ namespace APITest.Models
         public string status { get; set; }
 
         [JsonProperty("data")]
-        public ICollection<EmployeeDataModel> data { get; set; }
+        public EmployeeDataModel data { get; set; }
+
+        [JsonProperty("message")]
+        public string message { get; set; }
     }
 }

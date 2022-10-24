@@ -20,8 +20,6 @@ namespace APITest.Tests
         [Test]
         public async Task CheckThatEmployeeControllerReturnsResponse()
         {
-            //var response = await this.GetEmployeeAsync();
-            //response.Should().NotBeNull("Response is null");
             var response = await this.GetEmployeeAsync();
             var jsonContent = JsonConvert.DeserializeObject<AllEmployeeModel>(response.Content);
             var actualStatus = jsonContent.status;
@@ -34,7 +32,19 @@ namespace APITest.Tests
         public async Task CheckThatEmployeeControllerReturnsResponseById()
         {
             var response = await this.GetEmployeeByIdAsync();
-            
+            var jsonContent = JsonConvert.DeserializeObject<SingleEmployeeModel>(response.Content);
+            var actualId = jsonContent.data.id;
+            var expectedStatus = ConfigConstants.ExpectedId;
+
+            Assert.AreEqual(expectedStatus, actualId, "User by ID not found");
+        }
+
+        [Test]
+        public async Task CheckThatEmployeeControllerPostNewEmployee()
+        {
+            var send = await this.PostEmployeeAsync();
+
+
         }
     }
 }

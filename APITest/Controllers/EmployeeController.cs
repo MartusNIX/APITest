@@ -6,11 +6,11 @@ namespace APITest.Controllers
     public class EmployeeController : BaseController
     {
         private const string GetEmployeeUrl = "/employees";
-        private const string GetEmployeeByIdUrl = "/employees/1";
+        private const string GetEmployeeByIdUrl = "/employee/1";
         private const string PostEmployeeUrl = "/create";
         private const string DeleteEmployeeUrl = "/delete/{0}";
         private const string PutEmployeeUrl = "/update/{0}";
-        private const string GetNonExistentEmployeeByIdUrl = "/employees/{0+24}";
+        private const string GetNonExistentEmployeeByIdUrl = "/employee/{0+24}";
         private const string DeleteNonExistentEmployeeByIdUrl = "/delete/{0+24}";
         private const string PutNonExistentEmployeeByIdUrl = "/update/{0+24}";
 
@@ -27,15 +27,10 @@ namespace APITest.Controllers
             return await this.GetAsync(resource);
         }
 
-        /*        protected async Task<object> GetEmployeeByIdAsync(*//*int employeeId*//*)
-                {
-                    var resource = string.Join(this.BaseUrl, string.Format(GetEmployeeByIdUrl*//*, employeeId*//*));
-                    return await this.GetAsync(resource);
-                }*/
-
-        /*        protected async Task<object> PostEmployeeUrlAsync()
-                {
-                    var resourse = string.Join(this.BaseUrl, string.Format(PostEmployeeUrl);
-                }*/
+        protected async Task<IRestResponse> PostEmployeeAsync()
+        {
+            var resourse = string.Join(this.BaseUrl, PostEmployeeUrl);
+            return await this.PutAsync(resourse);
+        }
     }
 }
