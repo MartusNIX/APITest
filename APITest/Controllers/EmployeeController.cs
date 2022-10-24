@@ -15,21 +15,27 @@ namespace APITest.Controllers
         private const string PutNonExistentEmployeeByIdUrl = "/update/{0+24}";
 
 
-        protected async Task<object> GetEmployeeAsync()
+        protected async Task<IRestResponse> GetEmployeeAsync()
         {
             var resource = string.Join(this.BaseUrl, GetEmployeeUrl);
             return await this.GetAsync(resource);
         }
 
-        protected async Task<object> GetEmployeeByIdAsync(/*int employeeId*/)
+        protected async Task<IRestResponse> GetEmployeeByIdAsync()
         {
-            var resource = string.Join(this.BaseUrl, string.Format(GetEmployeeByIdUrl/*, employeeId*/));
+            var resource = string.Join(this.BaseUrl,GetEmployeeByIdUrl);
             return await this.GetAsync(resource);
         }
 
-/*        protected async Task<object> PostEmployeeUrlAsync()
-        {
-            var resourse = string.Join(this.BaseUrl, string.Format(PostEmployeeUrl);
-        }*/
+        /*        protected async Task<object> GetEmployeeByIdAsync(*//*int employeeId*//*)
+                {
+                    var resource = string.Join(this.BaseUrl, string.Format(GetEmployeeByIdUrl*//*, employeeId*//*));
+                    return await this.GetAsync(resource);
+                }*/
+
+        /*        protected async Task<object> PostEmployeeUrlAsync()
+                {
+                    var resourse = string.Join(this.BaseUrl, string.Format(PostEmployeeUrl);
+                }*/
     }
 }

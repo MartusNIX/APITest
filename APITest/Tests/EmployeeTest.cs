@@ -1,5 +1,6 @@
 ﻿using APITest.Constants;
 using APITest.Controllers;
+using APITest.Models;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
@@ -9,6 +10,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Assert = NUnit.Framework.Assert;
+
 
 namespace APITest.Tests
 {
@@ -21,18 +23,18 @@ namespace APITest.Tests
             //var response = await this.GetEmployeeAsync();
             //response.Should().NotBeNull("Response is null");
             var response = await this.GetEmployeeAsync();
-            var jsonContent = JsonConvert.DeserializeObject<RootMult>(response.Content);
+            var jsonContent = JsonConvert.DeserializeObject<AllEmployeeModel>(response.Content);
             var actualStatus = jsonContent.status;
-            var expectedStatus = "success";
+            var expectedStatus = ConfigConstants.ExpectedStatus;
 
-            Assert.AreEqual(expectedStatus, actualStatus, "The records has not been found");
+            Assert.AreEqual(expectedStatus, actualStatus, "All Employees not found");
         }
 
         [Test]
         public async Task CheckThatEmployeeControllerReturnsResponseById()
         {
             var response = await this.GetEmployeeByIdAsync();
-            Assert.AreEqual(ConfigConstants.ExpectedId, response);
+            
         }
     }
 }
