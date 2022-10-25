@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using APITest.Models;
+using RestSharp;
 using System.Threading.Tasks;
 
 namespace APITest.Controllers
@@ -6,30 +7,43 @@ namespace APITest.Controllers
     public class EmployeeController : BaseController
     {
         private const string GetEmployeeUrl = "/employees";
-        private const string GetEmployeeByIdUrl = "/employees/1";
+        private const string GetEmployeeByIdUrl = "/employee/1";
         private const string PostEmployeeUrl = "/create";
-        private const string DeleteEmployeeUrl = "/delete/{0}";
-        private const string PutEmployeeUrl = "/update/{0}";
-        private const string GetNonExistentEmployeeByIdUrl = "/employees/{0+24}";
+        private const string DeleteEmployeeUrl = "/delete/2";
+        private const string PutEmployeeUrl = "/update/3";
+        private const string GetNonExistentEmployeeByIdUrl = "/employee/{0+24}";
         private const string DeleteNonExistentEmployeeByIdUrl = "/delete/{0+24}";
         private const string PutNonExistentEmployeeByIdUrl = "/update/{0+24}";
 
 
-        protected async Task<object> GetEmployeeAsync()
+        protected async Task<IRestResponse> GetEmployeeAsync()
         {
             var resource = string.Join(this.BaseUrl, GetEmployeeUrl);
             return await this.GetAsync(resource);
         }
 
-        protected async Task<object> GetEmployeeByIdAsync(/*int employeeId*/)
+        protected async Task<IRestResponse> GetEmployeeByIdAsync()
         {
-            var resource = string.Join(this.BaseUrl, string.Format(GetEmployeeByIdUrl/*, employeeId*/));
+            var resource = string.Join(this.BaseUrl,GetEmployeeByIdUrl);
             return await this.GetAsync(resource);
         }
 
-/*        protected async Task<object> PostEmployeeUrlAsync()
+        protected async Task<IRestResponse> PostEmployeeAsync(NewEmployeeDataModel model)
         {
-            var resourse = string.Join(this.BaseUrl, string.Format(PostEmployeeUrl);
-        }*/
+            var resourse = string.Join(this.BaseUrl, PostEmployeeUrl);
+            return await this.PostAsync(resourse, model);
+        }
+
+        protected async Task<IRestResponse> DeleteEmployeeAsync()
+        {
+            var resource = string.Join(this.BaseUrl, DeleteEmployeeUrl);
+            return await this.DeleteAsync(resource);
+        }
+
+        protected async Task<IRestResponse> PutEmployeeAsync(NewEmployeeDataModel model)
+        {
+            var resource = string.Join(BaseUrl, PutEmployeeUrl);
+            return await PutAsync(resource, model);
+        }
     }
 }
