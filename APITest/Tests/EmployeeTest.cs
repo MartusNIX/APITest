@@ -1,13 +1,8 @@
 ﻿using APITest.Constants;
 using APITest.Controllers;
 using APITest.Models;
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using NUnit.Framework.Internal.Commands;
-using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Assert = NUnit.Framework.Assert;
 
@@ -18,7 +13,7 @@ namespace APITest.Tests
     public class EmployeeTest : EmployeeController
     {
         [Test]
-        public async Task CheckThatEmployeeControllerReturnsResponse()
+        public async Task CheckThatEmployeeControllerReturnAllEmployees()
         {
             var response = await this.GetEmployeeAsync();
             var jsonContent = JsonConvert.DeserializeObject<AllEmployeesModel>(response.Content);
@@ -31,7 +26,7 @@ namespace APITest.Tests
         [Test]
         public async Task CheckThatEmployeeControllerReturnsResponseById()
         {
-            var response = await this.GetEmployeeByIdAsync();
+            var response = await this.GetEmployeeByIdAsync("1");
             var jsonContent = JsonConvert.DeserializeObject<SingleEmployeeModel>(response.Content);
             var actualId = jsonContent.data.id;
             var expectedStatus = ConfigConstants.ExpectedId;
@@ -42,25 +37,29 @@ namespace APITest.Tests
         [Test]
         public async Task CheckThatEmployeeControllerCreateNewEmployee()
         {
-            NewEmployeeDataModel model = new NewEmployeeDataModel();
-            model.name = "Krol";
-            model.salary = "5000";
-            model.age = "29";
+            var model = new NewEmployeeDataModel
+            {
+                name = "Krol",
+                salary = "5000",
+                age = "29"
+            };
             var sentResponse = await this.PostEmployeeAsync(model);
             var jsonContent = JsonConvert.DeserializeObject<NewEmployeeDataModel>(sentResponse.Content);
             var actualMessage = jsonContent.message;
             var expectedMessage = ConfigConstants.SuccessMessagePOST;
             Assert.AreEqual(expectedMessage, actualMessage, "User not created");
-        }
+        }        
 
         [Test]
         public async Task CheckThatEmployeeControllerUpdateEmployee()
         {
-            NewEmployeeDataModel model = new NewEmployeeDataModel();
-            model.name = "Ichigo";
-            model.salary = "3000";
-            model.age = "16";
-            var sentResponse = await PutEmployeeAsync(model);
+            var model = new NewEmployeeDataModel
+            {
+                name = "Ichigo",
+                salary = "3000",
+                age = "2022"
+            };
+            var sentResponse = await this.PutEmployeeAsync("2", model);
             var jsonContent = JsonConvert.DeserializeObject<SingleEmployeeModel>(sentResponse.Content);
             var actualMessage = jsonContent.message;
             var expectedMessage = ConfigConstants.SuccessMessagePUT;
@@ -70,7 +69,7 @@ namespace APITest.Tests
         [Test]
         public async Task CheckThatEmployeeControllerDeleteEmployee()
         {
-            var response = await this.DeleteEmployeeAsync();
+            var response = await this.DeleteEmployeeAsync("3");
             var jsonContent = JsonConvert.DeserializeObject<DelletedEmployeeModel>(response.Content);
             var actualMessage = jsonContent.message;
             var expectedMessage = ConfigConstants.SuccessMessageDEL;
