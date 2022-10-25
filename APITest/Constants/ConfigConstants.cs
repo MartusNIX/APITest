@@ -9,6 +9,5 @@
         public const string SuccessMessageGET = "Successfully! Record has been fetched.";
         public const string ExpectedStatus = "success";
         public const string ExpectedId = "1";
-        public const string ExpectedName = "Tiger Nixon";
     }
 }

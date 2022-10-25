@@ -11,7 +11,7 @@ namespace APITest.Models
         public string status { get; set; }
 
         [JsonProperty("data")]
-        public EmployeeDataModel data { get; set; }
+        public DataEmployeeModel data { get; set; }
 
         [JsonProperty("message")]
         public string message { get; set; }

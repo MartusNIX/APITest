@@ -5,13 +5,13 @@ using System.Text;
 
 namespace APITest.Models
 {
-    public class AllEmployeeModel
+    public class AllEmployeesModel
     {
         [JsonProperty("status")]
         public string status { get; set; }
 
         [JsonProperty("data")]
-        public List<EmployeeDataModel> data { get; set; }
+        public List<DataEmployeeModel> data { get; set; }
 
         [JsonProperty("message")]
         public string message { get; set; }

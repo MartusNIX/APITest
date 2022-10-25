@@ -21,7 +21,7 @@ namespace APITest.Tests
         public async Task CheckThatEmployeeControllerReturnsResponse()
         {
             var response = await this.GetEmployeeAsync();
-            var jsonContent = JsonConvert.DeserializeObject<AllEmployeeModel>(response.Content);
+            var jsonContent = JsonConvert.DeserializeObject<AllEmployeesModel>(response.Content);
             var actualStatus = jsonContent.status;
             var expectedStatus = ConfigConstants.ExpectedStatus;
 
@@ -40,7 +40,7 @@ namespace APITest.Tests
         }
 
         [Test]
-        public async Task CheckThatEmployeeControllerPostNewEmployee()
+        public async Task CheckThatEmployeeControllerCreateNewEmployee()
         {
             NewEmployeeDataModel model = new NewEmployeeDataModel();
             model.name = "Krol";
@@ -54,6 +54,20 @@ namespace APITest.Tests
         }
 
         [Test]
+        public async Task CheckThatEmployeeControllerUpdateEmployee()
+        {
+            NewEmployeeDataModel model = new NewEmployeeDataModel();
+            model.name = "Ichigo";
+            model.salary = "3000";
+            model.age = "16";
+            var sentResponse = await PutEmployeeAsync(model);
+            var jsonContent = JsonConvert.DeserializeObject<SingleEmployeeModel>(sentResponse.Content);
+            var actualMessage = jsonContent.message;
+            var expectedMessage = ConfigConstants.SuccessMessagePUT;
+            Assert.AreEqual(expectedMessage, actualMessage, "User not updeted");
+        }
+
+        [Test]
         public async Task CheckThatEmployeeControllerDeleteEmployee()
         {
             var response = await this.DeleteEmployeeAsync();
@@ -61,20 +75,6 @@ namespace APITest.Tests
             var actualMessage = jsonContent.message;
             var expectedMessage = ConfigConstants.SuccessMessageDEL;
             Assert.AreEqual(expectedMessage, actualMessage, "User not deleted");
-        }
-
-        [Test]
-        public async Task CheckThatEmployeeControllerUpdateEmployee()
-        {
-            NewEmployeeDataModel model = new NewEmployeeDataModel();
-            model.name = "Ichigo";
-            model.salary = "3000";
-            model.age = "16";
-            var sentRequest = await PutEmployeeAsync(model);
-            var jsonContent = JsonConvert.DeserializeObject<SingleEmployeeModel>(sentRequest.Content);
-            var actualMessage = jsonContent.message;
-            var expectedMessage = ConfigConstants.SuccessMessagePUT;
-            Assert.AreEqual(expectedMessage, actualMessage, "User not updeted");
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace APITest.Models
 {
-    public class EmployeeDataModel
+    public class DataEmployeeModel
     {
         [JsonProperty("id")]
         public string id { get; set; }

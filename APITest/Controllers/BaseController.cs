@@ -29,17 +29,17 @@ namespace APITest.Controllers
             return await this.RestClient.ExecuteAsync<IRestResponse>(request, Method.POST);
         }
 
-        protected async Task<IRestResponse> DeleteAsync(string resource)
-        {
-            var request = new RestRequest(resource, Method.DELETE);
-            return await this.RestClient.ExecuteAsync<IRestResponse>(request, Method.DELETE);
-        }   
-
         protected async Task<IRestResponse> PutAsync(string resource, NewEmployeeDataModel model)
         {
             var request = new RestRequest(resource, Method.PUT);
             request.AddJsonBody(model);
             return await this.RestClient.ExecuteAsync<IRestResponse>(request, Method.PUT);
+        }
+
+        protected async Task<IRestResponse> DeleteAsync(string resource)
+        {
+            var request = new RestRequest(resource, Method.DELETE);
+            return await this.RestClient.ExecuteAsync<IRestResponse>(request, Method.DELETE);
         }
 
     }
