@@ -52,5 +52,17 @@ namespace APITest.Tests
             var expectedMessage = ConfigConstants.SuccessMessagePOST;
             Assert.AreEqual(expectedMessage, actualMessage, "User not created");
         }
+
+        [Test]
+        public async Task CheckThatEmployeeControllerDeleteEmployee()
+        {
+            var response = await DeleteEmployeeAsync();
+            var jsonContent = JsonConvert.DeserializeObject<DelletedEmployeeModel>(response.Content);
+            var actualMessage = jsonContent.message;
+            var expectedMessage = ConfigConstants.SuccessMessageDEL;
+            Assert.AreEqual(expectedMessage, actualMessage, "User not deleted");
+        }
+
+        
     }
 }

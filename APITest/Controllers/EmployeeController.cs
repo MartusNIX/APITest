@@ -9,7 +9,7 @@ namespace APITest.Controllers
         private const string GetEmployeeUrl = "/employees";
         private const string GetEmployeeByIdUrl = "/employee/1";
         private const string PostEmployeeUrl = "/create";
-        private const string DeleteEmployeeUrl = "/delete/{0}";
+        private const string DeleteEmployeeUrl = "/delete/2";
         private const string PutEmployeeUrl = "/update/{0}";
         private const string GetNonExistentEmployeeByIdUrl = "/employee/{0+24}";
         private const string DeleteNonExistentEmployeeByIdUrl = "/delete/{0+24}";
@@ -32,6 +32,12 @@ namespace APITest.Controllers
         {
             var resourse = string.Join(this.BaseUrl, PostEmployeeUrl);
             return await this.PostAsync(resourse, model);
+        }
+
+        protected async Task<IRestResponse> DeleteEmployeeAsync()
+        {
+            var resource = string.Join(this.BaseUrl, DeleteEmployeeUrl);
+            return await this.DeleteAsync(resource);
         }
     }
 }
