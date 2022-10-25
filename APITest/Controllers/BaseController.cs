@@ -35,9 +35,10 @@ namespace APITest.Controllers
             return await this.RestClient.ExecuteAsync<IRestResponse>(request, Method.DELETE);
         }   
 
-        protected async Task<IRestResponse> PutAsync(string resource)
+        protected async Task<IRestResponse> PutAsync(string resource, NewEmployeeDataModel model)
         {
             var request = new RestRequest(resource, Method.PUT);
+            request.AddJsonBody(model);
             return await this.RestClient.ExecuteAsync<IRestResponse>(request, Method.PUT);
         }
 

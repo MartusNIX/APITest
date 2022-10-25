@@ -56,13 +56,25 @@ namespace APITest.Tests
         [Test]
         public async Task CheckThatEmployeeControllerDeleteEmployee()
         {
-            var response = await DeleteEmployeeAsync();
+            var response = await this.DeleteEmployeeAsync();
             var jsonContent = JsonConvert.DeserializeObject<DelletedEmployeeModel>(response.Content);
             var actualMessage = jsonContent.message;
             var expectedMessage = ConfigConstants.SuccessMessageDEL;
             Assert.AreEqual(expectedMessage, actualMessage, "User not deleted");
         }
 
-        
+        [Test]
+        public async Task CheckThatEmployeeControllerUpdateEmployee()
+        {
+            NewEmployeeDataModel model = new NewEmployeeDataModel();
+            model.name = "Ichigo";
+            model.salary = "3000";
+            model.age = "16";
+            var sentRequest = await PutEmployeeAsync(model);
+            var jsonContent = JsonConvert.DeserializeObject<SingleEmployeeModel>(sentRequest.Content);
+            var actualMessage = jsonContent.message;
+            var expectedMessage = ConfigConstants.SuccessMessagePUT;
+            Assert.AreEqual(expectedMessage, actualMessage, "User not updeted");
+        }
     }
 }

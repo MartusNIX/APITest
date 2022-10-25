@@ -13,7 +13,7 @@ namespace APITest.Models
         [JsonProperty("salary")]
         public string salary { get; set; }
 
-        [JsonProperty("employee_age")]
+        [JsonProperty("age")]
         public string age { get; set; }
 
         [JsonProperty("image")]
