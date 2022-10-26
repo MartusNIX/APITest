@@ -7,16 +7,16 @@ namespace APITest.Models
         [JsonProperty("id")]
         public string id { get; set; }
 
-        [JsonProperty("name")]
+        [JsonProperty("employee_name")]
         public string name { get; set; }
 
-        [JsonProperty("salary")]
+        [JsonProperty("employee_salary")]
         public string salary { get; set; }
 
-        [JsonProperty("age")]
+        [JsonProperty("employee_age")]
         public string age { get; set; }
 
-        [JsonProperty("image")]
+        [JsonProperty("profile_image")]
         public string image { get; set; }
     }
 }

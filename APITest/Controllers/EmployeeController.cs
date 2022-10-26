@@ -13,13 +13,13 @@ namespace APITest.Controllers
         private const string PutEmployeeUrl = "/update/";
         private const string DeleteEmployeeUrl = "/delete/";
                
-        protected async Task<IRestResponse> GetEmployeeAsync()
+        protected async Task<IRestResponse> GetEmployeesAsync()
         {
             var resource = string.Concat(this.BaseUrl, GetEmployeesUrl);
             return await this.GetAsync(resource);
         }
 
-        protected async Task<IRestResponse> GetEmployeeByIdAsync(string index)
+        protected async Task<IRestResponse> GetOneEmployeeAsync(string index)
         {
             var resource = string.Concat(this.BaseUrl,GetEmployeeByIdUrl, index);
             return await this.GetAsync(resource);
@@ -44,3 +44,4 @@ namespace APITest.Controllers
         }
     }
 }
+ 

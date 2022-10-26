@@ -3,6 +3,7 @@ using APITest.Controllers;
 using APITest.Models;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System;
 using System.Threading.Tasks;
 using Assert = NUnit.Framework.Assert;
 
@@ -15,7 +16,7 @@ namespace APITest.Tests
         [Test]
         public async Task CheckThatEmployeeControllerReturnAllEmployees()
         {
-            var response = await this.GetEmployeeAsync();
+            var response = await this.GetEmployeesAsync();
             var jsonContent = JsonConvert.DeserializeObject<AllEmployeesModel>(response.Content);
             var actualStatus = jsonContent.status;
             var expectedStatus = ConfigConstants.ExpectedStatus;
@@ -26,12 +27,12 @@ namespace APITest.Tests
         [Test]
         public async Task CheckThatEmployeeControllerReturnsResponseById()
         {
-            var response = await this.GetEmployeeByIdAsync("1");
+            var response = await this.GetOneEmployeeAsync("10");
             var jsonContent = JsonConvert.DeserializeObject<SingleEmployeeModel>(response.Content);
             var actualId = jsonContent.data.id;
-            var expectedStatus = ConfigConstants.ExpectedId;
+            var expectedId = "10";
 
-            Assert.AreEqual(expectedStatus, actualId, "User by ID not found");
+            Assert.AreEqual(expectedId, actualId, "User by ID not found");
         }
 
         [Test]
@@ -47,6 +48,7 @@ namespace APITest.Tests
             var jsonContent = JsonConvert.DeserializeObject<NewEmployeeDataModel>(sentResponse.Content);
             var actualMessage = jsonContent.message;
             var expectedMessage = ConfigConstants.SuccessMessagePOST;
+
             Assert.AreEqual(expectedMessage, actualMessage, "User not created");
         }        
 
@@ -63,6 +65,7 @@ namespace APITest.Tests
             var jsonContent = JsonConvert.DeserializeObject<SingleEmployeeModel>(sentResponse.Content);
             var actualMessage = jsonContent.message;
             var expectedMessage = ConfigConstants.SuccessMessagePUT;
+
             Assert.AreEqual(expectedMessage, actualMessage, "User not updeted");
         }
 
@@ -73,7 +76,28 @@ namespace APITest.Tests
             var jsonContent = JsonConvert.DeserializeObject<DelletedEmployeeModel>(response.Content);
             var actualMessage = jsonContent.message;
             var expectedMessage = ConfigConstants.SuccessMessageDEL;
+
             Assert.AreEqual(expectedMessage, actualMessage, "User not deleted");
+        }
+
+        [Test]
+        public async Task CheckEmployeeExists()
+        {
+            var response = await this.GetOneEmployeeAsync("1");
+            var jsonContent = JsonConvert.DeserializeObject<SingleEmployeeModel>(response.Content);
+            var isEmployeeExist = jsonContent.data != null;
+
+            Assert.IsTrue(isEmployeeExist, "User data is null");
+        }
+
+        [Test]
+        public async Task CheckEmployeeDoesNotExist()
+        {
+            var response = await this.GetOneEmployeeAsync("100");
+            var jsonContent = JsonConvert.DeserializeObject<SingleEmployeeModel>(response.Content);
+            var dataIsNull = jsonContent.data == null;
+
+            Assert.IsTrue(dataIsNull, "User data is not null");
         }
     }
 }

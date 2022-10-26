@@ -1,12 +1,7 @@
 ﻿using APITest.Constants;
 using APITest.Managers;
 using APITest.Models;
-using FluentAssertions.Equivalency;
-using NUnit.Framework;
 using RestSharp;
-using RestSharp.Validation;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace APITest.Controllers

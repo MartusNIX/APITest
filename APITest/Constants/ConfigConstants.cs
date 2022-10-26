@@ -8,6 +8,5 @@
         public const string SuccessMessageDEL = "Successfully! Record has been deleted";
         public const string SuccessMessageGET = "Successfully! Record has been fetched.";
         public const string ExpectedStatus = "success";
-        public const string ExpectedId = "1";
     }
 }
