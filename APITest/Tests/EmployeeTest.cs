@@ -85,9 +85,9 @@ namespace APITest.Tests
         {
             var response = await this.GetOneEmployeeAsync("1");
             var jsonContent = JsonConvert.DeserializeObject<SingleEmployeeModel>(response.Content);
-            var isEmployeeExist = jsonContent.data != null;
+            var dataIsNotNull = jsonContent.data != null;
 
-            Assert.IsTrue(isEmployeeExist, "User data is null");
+            Assert.IsTrue(dataIsNotNull, "User data is null");
         }
 
         [Test]
